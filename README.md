@@ -36,7 +36,7 @@ DB Browser for SQLite online using Google Search.
 
 4. Next, go to the folder where you extracted the zip file. Then, install these Python requirements by using 'pip install'
 on the command prompt:
-  - django
+  - django (2.0.2 or later)
   - reportlab
 
 Note: You will need Python 3+, or the latest Python version.
