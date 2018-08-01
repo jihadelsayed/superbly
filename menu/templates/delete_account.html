@@ -1,0 +1,26 @@
+{% block content %}
+    {% load staticfiles %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'superblygreatapp/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'superblygreatapp/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+    <div class="container">
+        <div>
+            <b>{{ username }}</b>&nbsp;|&nbsp;<a href="{% url 'logout' %}">Logout</a> | <a
+                href="https://www.google.com/drive" target="_blank">Upload Photos and Share</a> | <a
+                href="https://sites.google.com/view/apps-books/home" target="_blank">Help!</a>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <h4>Delete Account for User: <b>{{ user }}</b></h4>
+            <form action="delete-account" method="post">
+                {% csrf_token %}
+                <p><b>Warning!</b> This will delete all your messages, friends' list and saved messages. You cannot
+                    retrieve it once deleted.</p>
+                <p>Are you sure you want to delete your account? </p>
+
+                <a href="/home">Cancel</a> &nbsp;&nbsp; <input style="float:right;" class="btn btn-lg btn-primary"
+                                                               type="submit" value="Delete">
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

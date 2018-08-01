@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{{ username }}{% endblock %}
+{% block content %}
+    {% load staticfiles %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'superblygreatapp/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'superblygreatapp/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+    <div class="container">
+        <!--<img src="./images/profile/thumb/{{pic}}" width="50" style="vertical-align:middle;">-->
+        <div><b>{{ username }}</b>&nbsp;|&nbsp;<a href="{% url 'logout' %}">Logout</a> | <a
+                href="https://www.google.com/drive" target="_blank">Upload Photos and Share</a> | <a
+                href="https://sites.google.com/view/apps-books/home" target="_blank">Help!</a></div>
+        <h1>SuperblyGreat - Change Password</h1>
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+            <form action="change-pass" method="post">
+                Current Password: <input type="text" class="form-control" name="currentpass" required
+                                         maxlength="10"></textarea>
+                New Password: <input type="text" class="form-control" name="newpass" required maxlength="10"></textarea>
+                Confirm Password: <input type="text" class="form-control" name="newpass2" required
+                                         maxlength="10"></textarea>
+                <div style="margin:20px;"><a href="/home">Cancel</a><input style="float:right;"
+                                                                           class="btn btn-sm btn-primary" type="submit"
+                                                                           value="Change Password"></div>
+                {% csrf_token %}
+            </form>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+            <b>Important Notice!</b>
+            <ul>
+                <li>Use complex, hard-to-guess passwords by using a password manager like Keepass (<a
+                        href="https://keepass.info/" target="_blank">https://keepass.info</a>) , 1Password, etc.
+                </li>
+                <li>Do not reuse the same passwords on different sites. Your password should be unique.</li>
+            </ul>
+            <h5>Password Generator</h5>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-success"><b>Old Password: </b> {{ old_pass }}</li>
+                <li class="list-group-item list-group-item-info"><b>Recommended New Password: </b> {{ new_pass }}</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
