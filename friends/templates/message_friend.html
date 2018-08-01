@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Message | {{ username }}{% endblock %}
+{% block content %}
+    {% load staticfiles %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'superblygreatapp/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'superblygreatapp/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+    <div class="container">
+        <div>
+            <b>{{ username }}</b>&nbsp;|&nbsp;<a href="{% url 'logout' %}">Logout</a> | <a
+                href="https://www.google.com/drive" target="_blank">Upload Photos and Share</a> | <a
+                href="https://sites.google.com/view/apps-books/home" target="_blank">Help!</a>
+        </div>
+        <h1>Message</h1>
+        <form action="" method="post">
+            <label>Message</label>
+            <textarea class="form-control" name="message" required></textarea>
+            <input type="hidden" name="id" value="{{ friend }}">
+            <br/>
+
+            <div style="margin:20px;">
+                <span id="sendtoallspan"><input id="sendtoallcheckbox" type="checkbox" name="sendtoall">&nbsp;&nbsp;Send to All&nbsp;&nbsp;
+                  <br/><br/><a
+                    href="/home">Cancel</a><input style="float:right;" class="btn btn-lg btn-primary" type="submit"
+                                                  value="Send">
+            </div>
+
+            {% csrf_token %}
+
+        </form>
+    </div>
+{% endblock %}
