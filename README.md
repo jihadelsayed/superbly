@@ -1,5 +1,5 @@
 # superbly
-Superbly Great Private Messaging System (Core)
+## Superbly Great Private Messaging System (Core)
 
 This is a private messaging Django app that gives users the ability to chat with
 other users in a fast and secure way, giving the users 100% privacy by adding
@@ -9,10 +9,10 @@ You can signup by just adding a username and password, entering the captcha answ
 and you can chat away for free. Using ONLY, a username and a password.
 
 The app doesn't ask these information:
--Email addresses.
--First name or Last names.
--Home addresses.
--Or, any other personal info.
+- Email addresses.
+- First name or Last names.
+- Home addresses.
+- Or, any other personal info.
 
 To install:
 1. First, create a Django project.
@@ -23,6 +23,7 @@ To install:
   - menu
   - messaging
   - sgcommapp (which the models.py is located for the project).
+  Note: Don't forget to add '__init__.py' on every module and views.
 3. The database has its own captcha data samples. But, it's better to just copy
 the captcha sample data to your newly created db.sqlite3 project using a database
 browser or manager and exporting it as CSV, then reimporting it.
