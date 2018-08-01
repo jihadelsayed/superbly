@@ -1,0 +1,100 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>Superbly Great | Welcome</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Social Chat Networking Website with 100% Privacy">
+    <meta name="keywords" content="Free Social Chat Networking Website Superb Great">
+    <style>
+    </style>
+    <script type="text/javascript" src="{% static 'superblygreatapp/js/jquery-2.1.4.min.js' %}"></script>
+    <link href="{% static 'superblygreatapp/css/custom.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'superblygreatapp/icons/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'superblygreatapp/icons/touch-icon-iphone-114.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'superblygreatapp/icons/touch-icon-iphone-114.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'superblygreatapp/icons/touch-icon-iphone-144.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'superblygreatapp/icons/touch-icon-iphone-144.png' %}">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'superblygreatapp/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'superblygreatapp/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div class="container" style="opacity:0;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <br/>
+            <div style="text-align:center;"><img src="{% static 'superblygreatapp/images/superblygreat.png' %}"
+                                                 width="200px" height="200px"/>
+                <h1>Superbly Great</h1></div>
+            <hr>
+            <h1 class="form-signin-heading">Signup</h1>
+            <form class="form-signin" action="signup" method="post" enctype="multipart/form-data" id="frmId"
+                  autocomplete="off">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <b>Important Notice!</b>
+                <ul>
+                    <li>Use complex, hard-to-guess passwords by using a password manager like Keepass (<a
+                            href="https://keepass.info/" target="_blank">https://keepass.info</a>) , 1Password, etc.
+                    </li>
+                    <li>Do not reuse the same passwords on different sites. Your password should be unique.</li>
+                </ul>
+                <h5>Password Generator</h5>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-info"><b>Recommended New Password: </b> {{ new_pass }}
+                    </li>
+                    <li class="list-group-item list-group-item-success"><a
+                            href="/download-password-signup/{{ new_pass }}">Download Password</a></li>
+                </ul>
+
+                <br/>
+                Question: <textarea class="form-control" name="question" readonly required
+                                    maxlength="50">{{ question }}</textarea>
+                Answer: <input type="text" class="form-control" name="answer" required maxlength="30"
+                               autocomplete="off">
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="signup">
+
+            </form>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h1 class="form-signin-heading">Login</h1>
+            <form class="form-signin" action="login" method="post">
+                {% csrf_token %}
+                <label>Username</label>
+                <input class="form-control" type="text" name="username" required>
+                <label>Password</label>
+                <input class="form-control" type="password" name="password" required>
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
+
+            </form>
+        </div>
+    </div>
+</div>
+<footer>
+    <script>
+        $(document).ready(function () {
+            $('.container').delay(5000).animate({opacity: '1.0'}, 600);
+            $(this).scrollTop(0);
+        });
+    </script>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div style="text-align:center">
+        superblygreat 2018
+    </div>
+
+</footer>
+</body>
+</html>
