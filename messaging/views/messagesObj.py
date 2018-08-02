@@ -8,16 +8,15 @@ class messagesObj():
         self.messageID = []
 
     def getMessagesList(self, MessagesObj):
-        Messages = MessagesObj.objects.all().order_by('-id')
+        #Gets the profile username
+        userIdObj = Profile.objects.filter(id = self.req.session['user_id'])
+        #Gets all messages sent to the username logged in. Show latest first.
+        Messages = MessagesObj.objects.filter(friend__friend_id = userIdObj[0].username).order_by('-id')
         for messages in Messages:
-            friend = Friends.objects.filter(id=messages.friend_id)
-            user = Profile.objects.filter(username=friend[0].friend_id)
-            if messages.user_id == int(friend[0].user_id) and self.req.session['user_id'] == user[0].id:
-                messageSender = Profile.objects.filter(id=messages.user_id)
-                if messageSender:
-                    self.MsgsList.append(messages.message + " | " + messageSender[0].username)
-                    # print(messages.id)
-                    self.messageID.append(messages.id)
+            messageSender = Profile.objects.filter(id = messages.user_id)
+            if messageSender:
+                self.MsgsList.append(messages.message + " | " + messageSender[0].username)
+                self.messageID.append(messages.id)
 
         # MsgsSorted = sorted(self.MsgsList, reverse=True)
         MsgsSorted = self.MsgsList
