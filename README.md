@@ -1,3 +1,7 @@
+![Superbly Great][logo]
+
+[logo]: https://i.imgur.com/UvmBiv1.png "Superbly Great"
+
 # superbly
 ## Superbly Great Private Messaging System (Core)
 
