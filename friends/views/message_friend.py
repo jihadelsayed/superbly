@@ -27,7 +27,7 @@ class MessageFriend(View):
                 for userFriends in userFriendsObj:  # iterate to all user's friends
                     friendIdObj = SuperblyServices.filter_messages(request, userFriends.id)
 
-                    if friendIdObj.count():
+                    if friendIdObj:
                         message_obj = Messages(message=request.POST.get('message'), user_id=user, friend_id=userFriends.id)
                         message_obj.save()
                         cntr = cntr + 1
@@ -51,7 +51,7 @@ class MessageFriend(View):
                 # send message to only one user.
                 friendIdObj = SuperblyServices.filter_messages(request, friendIdFromGet)
 
-                if friendIdObj.count():
+                if friendIdObj:
                     message_obj = Messages(message=request.POST.get('message'), user_id=user,
                                            friend_id=request.POST.get('id'))
                     message_obj.save()

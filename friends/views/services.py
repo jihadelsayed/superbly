@@ -12,9 +12,13 @@ class SuperblyServices:
             return True
 
     def filter_messages(request, userFriends):
+        noFriendId = False
         # if user is a friend and added the user as a friend.
         friendIdFromObj = Friends.objects.filter(id=userFriends)
-        userIdFromObj = Profile.objects.filter(username=friendIdFromObj[0].friend_id)
-        friendIdObj = Friends.objects.filter(user_id=userIdFromObj[0].id, friend_id=request.session['username'])
+        if len(friendIdFromObj) > 0:
+            userIdFromObj = Profile.objects.filter(username=friendIdFromObj[0].friend_id)
+            friendIdObj = Friends.objects.filter(user_id=userIdFromObj[0].id, friend_id=request.session['username'])
 
-        return friendIdObj
+            return friendIdObj
+        else:
+            return noFriendId
