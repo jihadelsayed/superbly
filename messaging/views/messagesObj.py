@@ -24,8 +24,6 @@ class messagesObj():
 
     def deleteAllMessages(self, MessagesObject):
         user_obj = Profile.objects.filter(id=self.req.session['user_id'])
-        friend_obj = Friends.objects.filter(user_id=self.req.session['user_id']).order_by('-id')
-        message_obj = MessagesObject.objects.filter(user_id=self.req.session['user_id']).order_by('-id')
         userIdOfSession = user_obj[0].username
         # username is equal to friendname in friends table
         friendObjId = Friends.objects.filter(friend_id=userIdOfSession)
