@@ -52,13 +52,12 @@ You will see the Superbly Great logo, signup and login.
 
 Hooray!
 
-I hope you would consider trying out the app and feel free to modify it and add
-more features that will suit your needs. By opening the source code, I hope that it
-will spark your creativity and bring life to a flourishing community.
+I hope you would consider trying out the app and feel free to modify it and add more features that will suit your needs like adding photo sharing, file sharing, public upvotes, or likes, team collaboration, etc. By opening the source code, I hope that it will spark your creativity and bring life to a flourishing community.
 
 So, let your imagination fly!
 
 Please support me at IndieGoGo: [Indiegogo Project](https://igg.me/at/superblygreat/x "Indiegogo Superbly Great")
+
 Thank You!
 
 Sincerely,
