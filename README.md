@@ -50,16 +50,19 @@ Note: You will need Python 3+, or the latest Python version.
 It will tell to open your web browser and type: '127.0.0.1:8000' in the address bar and load it.
 You will see the Superbly Great logo, signup and login.
 
-Hooray!
+Well Done!
 
-I hope you would consider trying out the app and feel free to modify it and add more features that will suit your needs like adding photo sharing, file sharing, public upvotes, or likes, team collaboration, etc. By opening the source code, I hope that it will spark your creativity and bring life to a flourishing community.
+An Open Letter
 
-So, let your imagination fly!
+You know nowadays there is no more privacy. Big companies knows everything about you, but you don't
+know anything about them. Can they be trusted? Maybe not since we read news that these employees goes
+out-of-bounds and use your data for nefarious purposes and stalking women on-line and it's scary.
+We cannot control social media from those powers beyond ourselves, that is why we need and our duty
+to stand up against intrusions into our lives and protect our freedom. We need to build a social
+network based on the foundation of these freedoms, promote privacy and enjoy our lives connecting
+to our dearest friends and families, holding ourselves accountable for their freedom, for we are
+a society built on trust.
 
-Please support me at IndieGoGo: [Indiegogo Project](https://igg.me/at/superblygreat/x "Indiegogo Superbly Great")
+"I have planted a seed, you must do your part and make it grow."
 
-Thank You!
-
-Sincerely,
-Fernando
-
+-Fernando
