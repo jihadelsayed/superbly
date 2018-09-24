@@ -14,6 +14,9 @@ class BaseProfile(models.Model):
 class Profile(BaseProfile):
     pass
 
+class Account(BaseProfile):
+    logged = models.BooleanField(default=False)
+
 class SignupForm(ModelForm):
     class Meta:
         model=Profile
@@ -40,4 +43,8 @@ class SavedMessages(models.Model):
     user = models.ForeignKey('Profile', on_delete=models.CASCADE, )
     friend = models.ForeignKey('Friends', on_delete=models.CASCADE,)
     message = models.TextField(max_length=500)
-    
+
+class Notifications(models.Model):
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE, )
+    friend_id = models.CharField(max_length=10)
+    message = models.TextField(max_length=280)

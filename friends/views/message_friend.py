@@ -35,13 +35,13 @@ class MessageFriend(View):
                         friendsNotAddedList.append(userFriends.friend_id)
                 if len(friendsNotAddedList) > 0:
                     if cntr == 0:
-                        return "<script>alert('Message is not sent to anyone. No one has added you yet. ');window.location = '/'</script>"
+                        return "<script>alert('Message is not sent to anyone. No one has added you yet. ');window.location = '/home'</script>"
                     else:
                         friendsNotSent = ""
                         for friends in friendsNotAddedList:
                             friendsNotSent = friendsNotSent + friends + ", "
 
-                        return "<script>alert('Message is sent to " + str(cntr) + " except: " + friendsNotSent + "');window.location = '/'</script>"
+                        return "<script>alert('Message is sent to " + str(cntr) + " except: " + friendsNotSent + "');window.location = '/home'</script>"
                 else:
                     #increment 1 to Stats number messages sent
                     #SuperblyServices.increment_msgs_sent(request)

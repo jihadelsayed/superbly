@@ -17,8 +17,17 @@ class SuperblyServices:
         friendIdFromObj = Friends.objects.filter(id=userFriends)
         if len(friendIdFromObj) > 0:
             userIdFromObj = Profile.objects.filter(username=friendIdFromObj[0].friend_id)
-            friendIdObj = Friends.objects.filter(user_id=userIdFromObj[0].id, friend_id=request.session['username'])
+            friendIdObj = Friends.objects.filter(user_id=userIdFromObj[0].id, friend_added='True', friend_id=request.session['username'])
 
             return friendIdObj
         else:
             return noFriendId
+
+    def notify_user(request, userid, added):
+        if added:
+            messageObj = " wants to talk with you."
+        else:
+            messageObj = " removed you."
+
+        notifyObj = Notifications(user_id=userid, friend_id = request.session['username']  ,message=messageObj)
+        notifyObj.save()

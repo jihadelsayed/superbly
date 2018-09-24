@@ -1,14 +1,25 @@
 {% extends "base.html" %}
 {% block title %}{{ username }}{% endblock %}
 {% block content %}
-    {% load staticfiles %}    
-    <!-- Reload page automatically-->
-    <script>
-        setInterval(function () {
+{% load staticfiles %}
+<!-- Reload page automatically-->
+<script>
+  setInterval(function () {
             autoloadpage();
 
-        }, 10000); // it will call the function autoload() after each 10 seconds.
+        }, 60000); // it will call the function autoload() after each 10 seconds.
 
+        setInterval(function () {
+            autoloadnotifications();
+        }, 30000); // it will call the function autoload() after each 10 seconds.
+
+        setInterval(function () {
+            alert("You are using Superbly for one hour, please take a break.");
+        }, 600000); // it will alert to take a break after 1 hour.
+
+        setInterval(function () {
+            autoloadfriendslist();
+        }, 10000); // it will call the function autoload() after each 10 seconds.
 
         function autoloadpage() {
             $.ajax({
@@ -19,142 +30,187 @@
                 }
             });
         }
+        function autoloadnotifications() {
+            $.ajax({
+                url: "/home",
+                success: function (data) {
+                    var divMessages = $(data).find('#gotonotifications').html();
+                    $('#gotonotifications').html(divMessages);
+                }
+            });
+        }
 
-
+        function autoloadfriendslist() {
+            $.ajax({
+                url: "/home",
+                success: function (data) {
+                    var divMessages = $(data).find('#gotofriendslist').html();
+                    $('#gotofriendslist').html(divMessages);
+                }
+            });
+        }
+    </script>
+<script>
+  $(document).on("keydown", function(e) {
+        if(e.ctrlKey && e.which == 46){
+          window.location = "/home";
+        }
+      });
     </script>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'superblygreatapp/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'superblygreatapp/css/bootstrap-theme.min.css' %}" rel="stylesheet">
-    <div class="container">
-        <!--<img src="./images/profile/thumb/{{pic}}" width="50" style="vertical-align:middle;">-->
-        <div>
-            <b>{{ username }}</b>&nbsp;|&nbsp;<a href="{% url 'logout' %}">Logout</a> | <a
+<!-- Bootstrap core CSS -->
+<link href="{% static 'superblygreatapp/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'superblygreatapp/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+<div class="container">
+  <!--<img src="./images/profile/thumb/{{pic}}" width="50" style="vertical-align:middle;">-->
+  <div>
+    <b>{{ username }}</b>&nbsp;|&nbsp;<a href="{% url 'logout' %}">Logout</a> | <a
                 href="https://www.google.com/drive" target="_blank">Upload Photos and Share</a> | <a
-                href="https://sites.google.com/view/apps-books/home" target="_blank">Help!</a>
-        </div>
-        <h1 style="font-family:'Helvetica Neue', Arial, sans-serif;">SuperblyGreat</h1>
-        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-            <label>Menu</label>
-            <ul>
-                <li><a href="/change-pass">Change Password</a></li>
-                <li><a href="/download-password">Download Password</a></li>
-
-                <li><a href="/delete-account">Delete Account</a></li>
-
-            </ul>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-            <form action="add-friend" method="post">
-                {% csrf_token %}
-                <label>Add Friend</label>
-                <textarea class="form-control" name="friend" required></textarea>
-                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Add">
+                href="https://sites.google.com/view/apps-books/home" target="_blank">Help!</a> |
+    <a href="#" onclick="alert('When someone is hurting you or making you do something that is not right, Delete the offending user from your Friend List. This will block the user from chatting with you. Tell the person to stop or you will report him/her to the police.');">Bully Alert</a>
+  </div>
+  <h1 style="font-family:'Helvetica Neue', Arial, sans-serif;">SuperblyGreat</h1>
+  <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+    <label id="gotomenuheader"><a href="#gotomenuheader">Menu</a></label>
+    <ul>
+      <li><a href="/change-pass">Change Password</a></li>
+      <!--<li><a href="/download-password">Download Password</a></li>-->
+      <li><a href="/delete-account">Delete Account</a></li>
+    </ul>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+    <form action="add-friend" method="post">
+      {% csrf_token %}
+      <label id="gotoaddfriendheader"><a href="#gotoaddfriendheader">Add Friend</a></label>
+      <textarea class="form-control" name="friend" required></textarea>
+      <input class="btn btn-lg btn-primary btn-block" type="submit" value="Add">
 
             </form>
-        </div>
-        <!-- <a href="add-friend">Add Friend</a> -->
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="overflow:auto; height:400px;">
-            <div id="gotofriendslist">
-            <br/>
-            <a href="#gotomessages">Go to Messages</a> | <a
+  </div>
+  <!-- <a href="add-friend">Add Friend</a> -->
+  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="overflow:auto; height:400px;">
+    <div id="gotofriendslist">
+      <br/>
+      <a href="#gotomessages">Go to Messages</a> | <a
                 href="#gotomymessages">Go to My Messages</a>
-            <h5 style="text-align:center;">*Friends List*</h5>
+      <h5 style="text-align:center;"><a id="friendslistheader" href="#gotofriendslist">*Friends List*<a/></h5>
 
-            <ul class="list-group">
-                {% for row in friend %}
-                    <li class="list-group-item list-group-item-success">{{ row.friend_id }}
-                        <div style="float:right;"><a href="/delete-friend/{{ row.id }}">Delete</a>&nbsp;|&nbsp;<a
-                                href="/message-friend/{{ row.id }}">Message</a></div>
-                    </li>
-                {% endfor %}
-            </ul>
-            <hr>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="overflow:auto; height:400px;">
-            <div id="gotomessages">
-                <br/>
-                <form action="save-checked-messages" method="post">
-                    {% csrf_token %}
-                    <a href="#gotofriendslist">Go to Friends List</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+      <ul class="list-group">
+        {% for row in friend %}
+
+        {% if row.friend_added == 0 %}
+        <li class="list-group-item list-group-item-success" id="friend_not_added">
+          <a id="friendrow" href="#gotofriendslist"> {{ row.friend_id }} </a>
+          <div style="float:right;"><a href="/delete-friend/{{ row.id }}">Delete</a>&nbsp;|&nbsp;<a
+                            href="/message-friend/{{ row.id }}">Message</a>
+          </div>
+        </li>
+        {% endif %}
+        {% if row.friend_added == 1 %}
+        <li class="list-group-item list-group-item-success" id="friend_added">
+          <a id="friendrow" href="#gotofriendslist"> {{ row.friend_id }} </a>
+          <div style="float:right;"><a href="/delete-friend/{{ row.id }}">Delete</a>&nbsp;|&nbsp;<a
+                            href="/message-friend/{{ row.id }}">Message</a>
+          </div>
+        </li>
+        {% endif %}
+
+        {% endfor %}
+      </ul>
+      <hr>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="overflow:auto; height:400px;">
+    <div id="gotomessages">
+      <br/>
+      <form action="save-checked-messages" method="post">
+        {% csrf_token %}
+        <a href="#gotofriendslist">Go to Friends List</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
                         href="/delete-all-messages">Delete All Messages</a> | <a href="#gotosavedmessages">Go to Saved
                     Messages</a> | <input class="btn btn-lg btn-primary btn-block" type="submit"
                                           value="Save Checked Messages"></a>
-                    <h5 style="text-align:center;">*Messages*</h5>
-                    <ul class="list-group">
-                        {% for key, value in messagefrom.items %}
-                            <li class="list-group-item list-group-item-success">
-                                {{ value }} | <input type="checkbox" name="{{ key }}" value="{{ messageCount }}">
+        <h5 id="messagesheader"><a href="#gotomessages">*Messages*</a></h5>
+        <ul class="list-group">
+          {% for key, value in messagefrom.items %}
+          <li id="messageslist" class="list-group-item list-group-item-success">
+            <a href="#messageslist">{{ value }}</a></label> | <input type="checkbox" name="{{ key }}" value="{{ messageCount }}">
                             </li>
-                        {% endfor %}
-                    </ul>
-                </form>
+          {% endfor %}
+        </ul>
+      </form>
 
+      <h5 id="gotolinksheader" style="text-align:center;"><a href="#gotolinksheader">*Links*</a></h5>
+      <ul class="list-group">
+        {% for key, value in receivedLinks.items %}
+        <li class="list-group-item">
+          <a href="{{ value }}" target="_blank">{{ value }}</a></li>
+        </li>
+        {% endfor %}
+      </ul>
 
-                <h5 style="text-align:center;">*Links*</h5>
-                <ul class="list-group">
-                    {% for key, value in receivedLinks.items %}
-                        <li class="list-group-item">
-                            <a href="{{ value }}" target="_blank">{{ value }}</a></li>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <a href="#gotofriendslist">Go to Friends List</a> &nbsp;&nbsp;<label style="text-align:center;"
-                                                                                     id="gotomymessages">*My
-                Messages*</label>
-                <ul class="list-group">
-                    {% for sndr in senderFriend %}
-
-
-                        <li class="list-group-item list-group-item-info">
-                            {{ sndr }}
-                        </li>
-                    {% endfor %}
-                </ul>
-                <h5 style="text-align:center;">*MyLinks*</h5>
-                <ul class="list-group">
-                    {% for key, value in sentLinks.items %}
-                        <li class="list-group-item">
-                            <a href="{{ value }}" target="_blank">{{ value }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="overflow:auto; height:400px;">
-            <div id="gotosavedmessages">
-                <br/>
-                <a href="#gotofriendslist">Go to Friends List</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+      <div id="gotomymessages">
+        <a href="#gotofriendslist">Go to Friends List</a> &nbsp;&nbsp;<label style="text-align:center;" id="mymessagesheader"><a href="#gotomymessages">*My Messages*</a></label>
+        <ul class="list-group">
+          {% for sndr in senderFriend %}
+          <li class="list-group-item list-group-item-info">
+            <a id="mymessagesrow" href="#gotomymessages">{{ sndr }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        <h5 id="gotomylinksheader" style="text-align:center;"><a href="#gotomylinksheader">*MyLinks*</a></h5>
+        <ul class="list-group">
+          {% for key, value in sentLinks.items %}
+          <li class="list-group-item">
+            <a href="{{ value }}" target="_blank">{{ value }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="overflow:auto; height:400px;">
+    <div id="gotosavedmessages">
+      <br/>
+      <a href="#gotofriendslist">Go to Friends List</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
                     href="/delete-all-saved-messages">Delete Saved Messages</a> | <a class="pdfDownloadMessages"
                                                                                      href="/download-saved-messages">Download</a>
-                <h5 style="text-align:center;">*SavedMessages*</h5>
-                <ul class="list-group">
-                    {% for row in savedmessagefrom %}
+      <h5 id="savedmessagesheader" style="text-align:center;"><a href="#gotosavedmessages">*SavedMessages*</a></h5>
+      <ul class="list-group">
+        {% for row in savedmessagefrom %}
+        <li class="list-group-item list-group-item-info">
+          <a id="savedmessages" href="#gotosavedmessages">{{ row }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      </form>
 
-
-                        <li class="list-group-item list-group-item-info">
-                            {{ row }}
-                        </li>
-
-                    {% endfor %}
-                </ul>
-                </form>
-
-                <h5 style="text-align:center;">*Saved Links*</h5>
-                <ul class="list-group">
-                    {% for key, value in savedLinks.items %}
-
-
-
-                        <li class="list-group-item">
-                            <a href="{{ value }}" target="_blank">{{ value }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-
-
-            </div>
-        </div>
+      <h5 id="gotosavedlinksheader" style="text-align:center;"><a href="#gotosavedlinksheader">*Saved Links*</a></h5>
+      <ul class="list-group">
+        {% for key, value in savedLinks.items %}
+        <li class="list-group-item">
+          <a href="{{ value }}" target="_blank">{{ value }}</a>
+        </li>
+        {% endfor %}
+      </ul>
     </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="overflow:auto; height:400px;">
+    <div id="gotonotifications">
+      <label><a href="#gotonotifications">*Notifications</a></label>
+      <ul>
+        {% for notification in notify %}
+        <li class="list-group-item list-group-item-info">
+          <form action="add-friend" method="post">
+            <input name="friend" type="text" value="{{ notification.friend_id }}" maxlength="10" readonly> &nbsp;<a href="#gotonotifications"> {{ notification.message }}</a>
+            {% csrf_token %}
+            {% if "wants to talk with you." in notification.message %}
+            <input style="width:100px;" type="submit" value="Add Friend" >
+                      {% endif %}
+                  </form>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
 {% endblock %}

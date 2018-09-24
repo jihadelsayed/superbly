@@ -2,88 +2,200 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
+
 <head>
-    <title>Superbly Great | Welcome</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Social Chat Networking Website with 100% Privacy">
-    <meta name="keywords" content="Free Social Chat Networking Website Superb Great">
-    <style>
-    </style>
-    <script type="text/javascript" src="{% static 'superblygreatapp/js/jquery-2.1.4.min.js' %}"></script>
-    <link href="{% static 'superblygreatapp/css/custom.css' %}" rel="stylesheet">
-    <link rel="shortcut icon" href="{% static 'superblygreatapp/icons/favicon.ico' %}">
-    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'superblygreatapp/icons/touch-icon-iphone-114.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'superblygreatapp/icons/touch-icon-iphone-114.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'superblygreatapp/icons/touch-icon-iphone-144.png' %}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'superblygreatapp/icons/touch-icon-iphone-144.png' %}">
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'superblygreatapp/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'superblygreatapp/css/bootstrap-theme.min.css' %}" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <meta charset="UTF-8">
+  <title>Superbly Great | Welcome</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Social Chat Networking Website with 100% Privacy">
+  <meta name="keywords" content="Free Social Chat Networking Website Superb Great">
+  <script type="text/javascript" src="{% static 'superblygreatapp/js/jquery-2.1.4.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'superblygreatapp/js/signup_audio.js' %}"></script>
+  <link href="{% static 'superblygreatapp/css/custom.css' %}" rel="stylesheet">
+  <link rel="shortcut icon" href="{% static 'superblygreatapp/icons/favicon.ico' %}">
+  <link rel="apple-touch-icon" sizes="57x57" href="{% static 'superblygreatapp/icons/touch-icon-iphone-114.png' %}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{% static 'superblygreatapp/icons/touch-icon-iphone-114.png' %}">
+  <link rel="apple-touch-icon" sizes="72x72" href="{% static 'superblygreatapp/icons/touch-icon-iphone-144.png' %}">
+  <link rel="apple-touch-icon" sizes="144x144" href="{% static 'superblygreatapp/icons/touch-icon-iphone-144.png' %}">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'superblygreatapp/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'superblygreatapp/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <meta charset="UTF-8">
 </head>
+
 <body>
 
-<div class="container" style="opacity:0;">
+  <div class="container" style="opacity:0;">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <br/>
-            <div style="text-align:center;"><img src="{% static 'superblygreatapp/images/superblygreat.png' %}"
-                                                 width="200px" height="200px"/>
-                <h1>Superbly Great</h1></div>
-            <hr>
-            <h1 class="form-signin-heading">Signup</h1>
-            <form class="form-signin" action="signup" method="post" enctype="multipart/form-data" id="frmId"
-                  autocomplete="off">
-                {% csrf_token %}
-                {{ form.as_p }}
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <br/>
+        <div style="text-align:center;">
+          <img src="{% static 'superblygreatapp/images/superblygreat.png' %}" width="200px" height="200px"/>
+          <h1>Superbly Great</h1>
+        </div>
+        <hr>
+        <h1 class="form-signin-heading">Signup</h1>
+        <form id="signin-form" class="form-signin" action="signup" method="post" enctype="multipart/form-data" id="frmId" autocomplete="off">
+          {% csrf_token %}
+          <div id="username-signup">
+            <label>Username:</label>{{ form.username }}
+          </div>
+          <div id="password-signup">
+            <label>Password:</label>{{ form.password }}
+          </div>
+          <div id="notice">
+            <b>Important Notice!</b>
+            <ul>
+              <li>Use complex, hard-to-guess passwords by using a password manager like Keepass (<a
+                              href="https://keepass.info/" target="_blank">https://keepass.info</a>) , 1Password, etc.
+              </li>
+              <li>Do not reuse the same passwords on different sites. Your password should be unique.</li>
+            </ul>
+          </div>
 
-                <b>Important Notice!</b>
-                <ul>
-                    <li>Use complex, hard-to-guess passwords by using a password manager like Keepass (<a
-                            href="https://keepass.info/" target="_blank">https://keepass.info</a>) , 1Password, etc.
-                    </li>
-                    <li>Do not reuse the same passwords on different sites. Your password should be unique.</li>
-                </ul>
-                <h5>Password Generator</h5>
-                <ul class="list-group">
-                    <li class="list-group-item list-group-item-info"><b>Recommended New Password: </b> {{ new_pass }}
-                    </li>
-                    <li class="list-group-item list-group-item-success"><a
-                            href="/download-password-signup/{{ new_pass }}">Download Password</a></li>
-                </ul>
-
-                <br/>
-                Question: <textarea class="form-control" name="question" readonly required
+          <div id="narrator">
+            <b>For disadvantaged children: </b>
+            <ul>
+              <li><a href="https://support.microsoft.com/en-ph/help/22798/windows-10-narrator-get-started" target="_blank" >Windows 10 Narrator: Getting Started</a></li>
+              <li>If you are using Windows 10, you may enable Narrator in the Settings->Ease of Access->Narrator.</li>
+              <ul />
+          </div>
+          <div id="password_generator">
+            <h5>Password Generator</h5>
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-info"><b>Recommended New Password: </b> {{ new_pass }}
+              </li>
+              <li class="list-group-item list-group-item-success">
+                <a href="/download-password-signup/{{ new_pass }}">Download Password</a>
+              </li>
+            </ul>
+          </div>
+          <br/>
+          <label id="question-signup">Question: </label>
+          <textarea id="captcha_question" class="form-control" name="question" readonly required
                                     maxlength="50">{{ question }}</textarea>
-                Answer: <input type="text" class="form-control" name="answer" required maxlength="30"
+          <label id="answer-signup">Answer: </label>
+          <input id="captcha_answer" type="text" class="form-control" name="answer" required maxlength="30"
                                autocomplete="off">
-                <input class="btn btn-lg btn-primary btn-block" type="submit" value="signup">
-
+          <input id="signup-button" class="btn btn-lg btn-primary btn-block" type="submit" value="Sign-up">
+              </form>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h1 class="form-signin-heading">Login</h1>
+        <form id="login-form" class="form-signin" action="login" method="post">
+          {% csrf_token %}
+          <label>Username</label>
+          <input class="form-control" type="text" name="username" required>
+          <label>Password</label>
+          <input class="form-control" type="password" name="password" required>
+          <input class="btn btn-lg btn-primary btn-block" type="submit" value="Log-in">
             </form>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <h1 class="form-signin-heading">Login</h1>
-            <form class="form-signin" action="login" method="post">
-                {% csrf_token %}
-                <label>Username</label>
-                <input class="form-control" type="text" name="username" required>
-                <label>Password</label>
-                <input class="form-control" type="password" name="password" required>
-                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
-
-            </form>
-        </div>
+      </div>
     </div>
-</div>
-<footer>
+    <!-- Audio for the blind -->
+    <audio id="intro" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/the_atom.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="signup_username_audio" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/signup_username.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="signup_password_audio" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/signup_password.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="notice_audio" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/notice.mp3' %}" type="audio/mpeg" />
+    </audio>
+
+    <audio id="narrator_audio" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/windows_narrator.mp3' %}" type="audio/mpeg" />
+    </audio>
+
+    <audio id="01" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/01.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="02" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/02.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="03" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/03.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="04" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/04.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="05" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/05.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="06" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/06.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="07" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/07.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="08" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/08.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="09" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/09.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="10" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/10.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="11" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/11.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="12" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/12.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="13" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/13.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="14" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/14.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="15" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/15.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="16" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/16.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="17" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/17.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="18" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/18.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="19" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/19.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="20" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_questions/20.mp3' %}" type="audio/mpeg" />
+    </audio>
+    <audio id="captcha_answer_audio" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/captcha_answer.mp3' %}" type="audio/mpeg" />
+    </audio>
+
+    <audio id="signup_audio" controls="controls" style="display:none;">
+      <source src="{% static 'superblygreatapp/audio/signup_button.mp3' %}" type="audio/mpeg" />
+    </audio>
+
+  </div>
+  <footer>
     <script>
-        $(document).ready(function () {
-            $('.container').delay(5000).animate({opacity: '1.0'}, 600);
-            $(this).scrollTop(0);
-        });
+      $(document).ready(function() {
+        // Webpage animation fade in
+        $('.container').delay(5000).animate({
+          opacity: '1.0'
+        }, 600);
+        $(this).scrollTop(0);
+
+        SignupAudio();
+      });
+      // Intro audio welcome
+      setTimeout(function() {
+        $('#intro').get(0).play();
+      }, 6000);
     </script>
     <br/>
     <br/>
@@ -92,9 +204,10 @@
     <br/>
     <br/>
     <div style="text-align:center">
-        superblygreat 2018
+      superblygreat 2018
     </div>
 
-</footer>
+  </footer>
 </body>
+
 </html>

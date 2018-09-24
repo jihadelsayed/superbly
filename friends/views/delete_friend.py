@@ -16,5 +16,20 @@ class DeleteFriend(View):
         if not response:
             return  HttpResponseRedirect("/")
         #remove friend if delete button is clicked.
-        Friends.objects.get(id=friend_id).delete()
+        userName = request.session['username']
+        friendNameObj = Friends.objects.filter(id=friend_id)
+        userObj = Profile.objects.filter(username = friendNameObj[0].friend_id)
+        friendAddedObj = Friends.objects.filter(user_id = userObj[0].id, friend_added = 'False')
+        friendExistObj = Friends.objects.filter(user_id = userObj[0].id, friend_id = userName)
+
+        if friendAddedObj or not friendExistObj:
+            Friends.objects.get(id=friend_id).delete()
+            added = False
+            SuperblyServices.notify_user(request, userObj[0].id, added)
+        else:
+            Friends.objects.filter(id = friend_id).update(friend_added = 'False')
+            added = False
+            SuperblyServices.notify_user(request, userObj[0].id, added)
+
+        # 08/24/2018 --end--
         return HttpResponseRedirect('/home')

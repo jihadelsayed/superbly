@@ -33,18 +33,21 @@ class ChangePassword(View):
         response = SuperblyServices.Test_User_Login(request)
         if not response:
             return  HttpResponseRedirect("/")
-            
+
         userName = request.session['username']
         currentPassword = request.POST.get('currentpass')
+        currentHashPass = SuperblyServices.hash_pass(currentPassword)
         newPassword = request.POST.get('newpass')
         newPassword2 = request.POST.get('newpass2')
-        if currentPassword and newPassword and newPassword2:
+        if currentHashPass and newPassword and newPassword2:
+            plain_password = request.POST.get('newpass')
+            hashed_password = SuperblyServices.hash_pass(plain_password)
             userObj = Profile.objects.filter(username=userName)
-            if userObj[0].password == currentPassword:
+            if userObj[0].password == currentHashPass:
                 if newPassword == newPassword2:
                     userObj = Profile.objects.get(username=userName)
                     # print(newPassword)
-                    userObj.password = newPassword
+                    userObj.password = hashed_password
                     userObj.save()
                     return HttpResponse(
                         "<script>alert('Password Updated. Keep safe your new password.');window.location = '/home'</script>")

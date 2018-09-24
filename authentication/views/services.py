@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 
 import random
 import re
+from hashlib import blake2b
 
 class SuperblyServices:
     def Test_User_Login(request):
@@ -20,6 +21,11 @@ class SuperblyServices:
         new_pass = ''.join(lst)
 
         return new_pass
+
+    def hash_pass(password):
+        m = blake2b(key=b'superbly', digest_size=16)
+        m.update(password.encode('utf-8'))
+        return m.hexdigest()
 
     def dedup(sndrMessageList, userIdOfSession, senderObj):  # Check for duplicates in messages list and remove them
 

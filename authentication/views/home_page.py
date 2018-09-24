@@ -25,6 +25,9 @@ class HomePageView(View):
         # username is equal to friendname in friends table
         friendObjId = Friends.objects.filter(friend_id=userIdOfSession)
 
+        #Notifications
+        notifyObj = Notifications.objects.filter(user_id = request.session['user_id']).order_by('-id')
+
         # Show Senders Messages
         senderObj = Messages.objects.filter(user_id=request.session['user_id']).order_by('-id')
 
@@ -66,6 +69,6 @@ class HomePageView(View):
         data = {'username': request.session['username'], 'user': user_obj, 'friend': friend_obj,
             'message': message_obj, 'messagefrom': messageRowsArray, 'messageCount': messageId,
             'savedmessagefrom': savedMsgsSorted, 'senderFriend': sndr, 'receivedLinks': receivedLinksObj,
-            'sentLinks': sentLinksObj, 'savedLinks': savedLinksObj }
+            'sentLinks': sentLinksObj, 'savedLinks': savedLinksObj, 'notify':notifyObj }
 
         return render(request, template_name, data)
