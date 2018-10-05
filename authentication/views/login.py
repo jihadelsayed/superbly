@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from random import randint
 
 from .services import SuperblyServices
+from sgcommapp.views.notificationsObj import notificationObj
 
 import time
 import datetime
@@ -37,8 +38,7 @@ class LoginView(View):
                     Account.objects.filter(username=request.session['username']).update(logged = True)
                     #notification time and date
                     messageObj = " logged-in on: " + str(datetime.datetime.now())
-                    notifyObj = Notifications(user_id = user_obj[0].id , friend_id = user_obj[0].username, message = messageObj)
-                    notifyObj.save()
+                    notifyObj = SuperblyServices.notify_user(user_obj[0].id, user_obj[0].username, messageObj)                    
                 else:
                     createAccount = Account(id=request.session['user_id'],username=request.session['username'], password=hashed_password, logged = True)
                     createAccount.save()

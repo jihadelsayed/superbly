@@ -1,6 +1,8 @@
 from sgcommapp.models import *
 from django.shortcuts import redirect
 
+from sgcommapp.views.notificationsObj import notificationObj
+
 import random
 import re
 from hashlib import blake2b
@@ -83,3 +85,7 @@ class SuperblyServices:
         link = list(range(len(urls)))
 
         return link, urls
+
+    def notify_user(user_id, friend_id, message):
+        notifyObj = notificationObj(user_id=user_id, friend_id = friend_id  ,message=message)
+        notifyObj.saveNotification()
