@@ -25,11 +25,11 @@ class DeleteFriend(View):
         if friendAddedObj or not friendExistObj:
             Friends.objects.get(id=friend_id).delete()
             added = False
-            SuperblyServices.notify_user(request, userObj[0].id, added)
+            SuperblyServices.notify_user(userObj[0].id, request.session['username'], added)
         else:
             Friends.objects.filter(id = friend_id).update(friend_added = 'False')
             added = False
-            SuperblyServices.notify_user(request, userObj[0].id, added)
+            SuperblyServices.notify_user(userObj[0].id, request.session['username'], added)
 
         # 08/24/2018 --end--
         return HttpResponseRedirect('/home')
