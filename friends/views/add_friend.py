@@ -42,7 +42,7 @@ class AddFriend(View):
                         Friends.objects.filter(friend_id = friendName).update(friend_added = 'True')
 
                         added = True
-                        SuperblyServices.notify_user(request, user_obj[0].id, added)
+                        SuperblyServices.notify_user(user_obj[0].id, request.session['username'], added)
                 else:
                     #if the user in Friends database has friend_added = False with user_id of the friend
                     friendUserIDObj = Friends.objects.filter(friend_id = request.session['username'], friend_added = 'False', user_id = user_obj[0].id)
@@ -56,7 +56,7 @@ class AddFriend(View):
                             Friends.objects.filter(friend_id = request.session['username'], user_id = user_obj[0].id).update(friend_added = 'True')
 
                             added = True
-                            SuperblyServices.notify_user(request, user_obj[0].id, added)
+                            SuperblyServices.notify_user(user_obj[0].id, request.session['username'], added)
 
                     else:
                         friendObj = Friends.objects.filter(friend_id=friendName, friend_added='True', user_id=userNameId)
@@ -67,6 +67,6 @@ class AddFriend(View):
                             friend_obj.save()
 
                             added = True
-                            SuperblyServices.notify_user(request, user_obj[0].id, added)
+                            SuperblyServices.notify_user(user_obj[0].id, request.session['username'], added)
 
         return HttpResponseRedirect('/home')

@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.db.models import F
 from sgcommapp.models import *
-
+from sgcommapp.views.notificationsObj import notificationObj
 
 
 class SuperblyServices:
@@ -23,11 +23,11 @@ class SuperblyServices:
         else:
             return noFriendId
 
-    def notify_user(request, userid, added):
+    def notify_user(userid, friend_id, added):
         if added:
             messageObj = " wants to talk with you."
         else:
             messageObj = " removed you."
 
-        notifyObj = Notifications(user_id=userid, friend_id = request.session['username']  ,message=messageObj)
-        notifyObj.save()
+        notifyObj = notificationObj(user_id=userid, friend_id = friend_id ,message=messageObj)
+        notifyObj.saveNotification()
