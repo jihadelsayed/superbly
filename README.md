@@ -10,6 +10,12 @@ This is a private messaging Django app that gives users the ability to chat with
 other users in a fast and secure way, giving the users 100% privacy by adding
 features that deletes all messages in one-click!
 
+Other special use cases:
+- Corporate or SMB internal communique. More secure than email.
+- Technical support chat system. For businesses that communicates directly at customers.
+- Your own messaging website. You can just upload this to your server or free hosting site and have your own FB.
+- As developers, you can extend and add features like photo sharing, video sharing, and more!
+
 You can signup by just adding a username and password, entering the captcha answer
 and you can chat away for free. Using ONLY, a username and a password.
 
