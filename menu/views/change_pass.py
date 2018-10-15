@@ -24,8 +24,9 @@ class ChangePassword(View):
         userName = request.session['username']
         new_passObj = SuperblyServices.pass_generate(request)
         user_pass_obj = Profile.objects.filter(id=request.session['user_id'])
-        old_passObj = user_pass_obj[0].password
-        variables = {'username': userName, 'old_pass': old_passObj, 'new_pass': new_passObj}
+        #old_passObj = user_pass_obj[0].password
+        #variables = {'username': userName, 'old_pass': old_passObj, 'new_pass': new_passObj}
+        variables = {'username': userName, 'new_pass': new_passObj}
         return render(request, template_name, variables)
 
 

@@ -4,6 +4,7 @@
 {% load staticfiles %}
 <!-- Reload page automatically-->
 <script>
+
   setInterval(function () {
             autoloadpage();
 
@@ -20,6 +21,14 @@
         setInterval(function () {
             autoloadfriendslist();
         }, 10000); // it will call the function autoload() after each 10 seconds.
+
+        setInterval(function () {
+            autoloadnews();
+        }, 300000); // it will call the function autoloadnews() after each 30 minutes = 300000
+
+        setInterval(function () {
+            autoloadweather();
+        }, 300000); // it will call the function autoloadnews() after each 30 minutes = 300000
 
         function autoloadpage() {
             $.ajax({
@@ -49,13 +58,103 @@
                 }
             });
         }
+
+        function autoloadnews() {
+        $.ajax({
+            url: "{% static 'superblygreatapp/js/worldNews.xml' %}", //http://feeds.reuters.com/reuters/topNews
+            type: 'GET',
+            dataType: "xml",
+            success: function(xml) {
+                            $(xml).find('item').each(function(){
+                                var link = $(this).find('link').text();
+                                $(this).find("description").each(function(){
+                                    var description = $(this).text();
+
+                                    $('.vticker ul').append("<li>" + "<a href='#newsDiv' style='color:black;'>" + description + "</a><br/><a href='" + link + "' target='_blank'>reuters</a></li>");
+                                });
+                            });
+                        }
+        });
+        $('.vticker ul').empty();
+        }
+
+        function autoloadweather() {
+      		$.ajax({
+      				url: '/home', //http://feeds.reuters.com/reuters/topNews
+      				success: function (data) {
+      						var divMessages = $(data).find('#weatherDiv').html();
+      						$('#weatherDiv').html(divMessages);
+      		}
+      	});
+      }
     </script>
-<script>
+    <script type="text/javascript">
+          $(document).ready(function(){
+          autoloadnews();
+            var dd = $('.vticker').easyTicker({
+              direction: 'up',
+              easing: 'easeInOutBack',
+              speed: 'slow',
+              interval: 15000,
+              height: 'auto',
+              visible: 2,
+              mousePause: 1,
+              controls: {
+                up: '.up',
+                down: '.down',
+                toggle: '.toggle',
+                stopText: 'Stop !!!'
+              }
+            }).data('easyTicker');
+
+            cc = 1;
+            $('.aa').click(function(){
+              $('.vticker ul').append('<li>' + cc + ' Triangles can be made easily using CSS also without any images. This trick requires only div tags and some</li>');
+              cc++;
+            });
+
+            $('.vis').click(function(){
+              dd.options['visible'] = 3;
+
+            });
+
+            $('.visall').click(function(){
+              dd.stop();
+              dd.options['visible'] = 0 ;
+              dd.start();
+            });
+	          dd.options['visible'] = 0 //visible all items
+          });
+    </script>
+    <style>
+    .vticker{
+      border: 1px solid gray;
+      width: 400px;
+    }
+    .vticker ul{
+      padding: 0;
+    }
+    .vticker li{
+      list-style: none;
+      border-bottom: 1px dashed darkgray;
+      padding: 10px;
+    }
+    .et-run{
+      background: gray;
+    }
+    .vticker ul li {
+      background: #fafafa;
+    }
+    </style>
+
+  <script>
   $(document).on("keydown", function(e) {
         if(e.ctrlKey && e.which == 46){
           window.location = "/home";
         }
       });
+
+
     </script>
 
 <!-- Bootstrap core CSS -->
@@ -212,5 +311,18 @@
       </ul>
     </div>
   </div>
+    <div id="newsDiv" class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="overflow:auto; height:500px;">
+      <h1>News Ticker</h1>
+      <div class="vticker">
+        <ul>
+        <!-- <li>Triangles can be made easily using CSS also without any images. This trick requires only div tags and some CSS works. To get this trick, just use the code below.</li> -->
+        </ul>
+      </div>
+    </div>
+
+    <div  id="weatherDiv" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h1>Weather</h1>
+      <iframe   height="450px" width="90%" style="overflow: visible|hidden|scroll|auto|initial|inherit;border:none;" src="https://weather.com/en-PH/weather/today/l/RPXX0017:1:RP" name="iframe_webpage"></iframe>
+    </div>
 </div>
 {% endblock %}
