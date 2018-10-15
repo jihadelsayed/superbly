@@ -46,7 +46,7 @@ class HomePageView(View):
         sentLinksObj = dict(zip(sentLinks, sentLinksUrls))
 
         # Show Messages home.html
-        msg = messagesObj(request)
+        msg = MessagesObj(request)
         messageId, messageById = msg.getMessagesList(Messages)
 
         # extract urls from messages
@@ -57,7 +57,7 @@ class HomePageView(View):
         messageRowsArray = dict(zip(messageId, messageById))
 
         # Show Saved Messages home.html
-        msgSaved = messagesObj(request)
+        msgSaved = MessagesObj(request)
         savedMessagesList, savedMsgsSorted = msgSaved.getMessagesList(SavedMessages)
 
         # savedMessagesList.reverse()

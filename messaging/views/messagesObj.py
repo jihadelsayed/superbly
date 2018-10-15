@@ -1,17 +1,17 @@
 from sgcommapp.models import *
 
 
-class messagesObj():
+class MessagesObj():
     def __init__(self, req):
         self.MsgsList = []
         self.req = req
         self.messageID = []
 
-    def getMessagesList(self, MessagesObj):
+    def getMessagesList(self, messagesObj):
         #Gets the profile username
         userIdObj = Profile.objects.filter(id = self.req.session['user_id'])
         #Gets all messages sent to the username logged in. Show latest first.
-        Messages = MessagesObj.objects.filter(friend__friend_id = userIdObj[0].username).order_by('-id')
+        Messages = messagesObj.objects.filter(friend__friend_id = userIdObj[0].username).order_by('-id')
         for messages in Messages:
             messageSender = Profile.objects.filter(id = messages.user_id)
             if messageSender:

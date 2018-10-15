@@ -1,7 +1,7 @@
 from sgcommapp.models import *
 from django.shortcuts import redirect
 
-from sgcommapp.views.notificationsObj import notificationObj
+from sgcommapp.views.notificationsObj import NotificationObj
 
 import random
 import re
@@ -87,5 +87,5 @@ class SuperblyServices:
         return link, urls
 
     def notify_user(user_id, friend_id, message):
-        notifyObj = notificationObj(user_id=user_id, friend_id = friend_id  ,message=message)
+        notifyObj = NotificationObj(user_id=user_id, friend_id = friend_id  ,message=message)
         notifyObj.saveNotification()

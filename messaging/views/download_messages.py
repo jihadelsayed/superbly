@@ -20,7 +20,7 @@ class DownloadMessages(View):
         response = SuperblyServices.Test_User_Login(request)
         if not response:
             return  HttpResponseRedirect("/")
-                    
+
         # Create the HttpResponse object with the appropriate PDF headers.
         #response = HttpResponse(content_type='application/pdf')
         #response['Content-Disposition'] = 'attachment; filename="superbly_saved_messages.pdf"'
@@ -28,7 +28,7 @@ class DownloadMessages(View):
         # userObj = User.objects.filter(id=request.session['user_id']) #7
         # friendObj = Friends.objects.filter(friend_id = userObj[0].username) #jun
 
-        friendMsgObj = messagesObj(request)
+        friendMsgObj = MessagesObj(request)
         friendObj = friendMsgObj.getFriendObj()
 
         #userId = ""

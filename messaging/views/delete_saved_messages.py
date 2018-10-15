@@ -13,8 +13,8 @@ class DeleteSavedMessages(View):
         response = SuperblyServices.Test_User_Login(request)
         if not response:
             return  HttpResponseRedirect("/")
-                    
-        msg = messagesObj(request)
+
+        msg = MessagesObj(request)
         msg.deleteAllMessages(SavedMessages)
         return HttpResponseRedirect('/home')
 

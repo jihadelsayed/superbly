@@ -16,12 +16,12 @@ class SaveMessages(View):
         response = SuperblyServices.Test_User_Login(request)
         if not response:
             return  HttpResponseRedirect("/")
-                    
+
         # userMessages = User.objects.filter(id=request.session['user_id'])
         # #print(userMessages) #request.session['user_id'] = 7 userMessages[0] = jun
         # friendMessages = Friends.objects.filter(friend_id=userMessages[0])
 
-        friendMsgObj = messagesObj(request)
+        friendMsgObj = MessagesObj(request)
         friendMessages = friendMsgObj.getFriendObj()
 
         messageId = request.POST  # get SaveCheckedMessages form and if the checkboxes are checked.

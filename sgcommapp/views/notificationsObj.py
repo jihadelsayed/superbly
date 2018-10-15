@@ -1,7 +1,7 @@
 from sgcommapp.models import *
 
 
-class notificationObj():
+class NotificationObj():
     def __init__(self, user_id, friend_id, message):
         self.user_id = user_id
         self.friend_id = friend_id

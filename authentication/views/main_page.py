@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from random import randint
 
 from .services import SuperblyServices
+from .captcha import CaptchaObj
 
 class MainPageView(View):
 
@@ -17,12 +18,9 @@ class MainPageView(View):
         form = SignupForm()
 
         # generate captcha with random question.
-        randomId = randint(1, 20)
-        captchaObj = Captcha.objects.filter(id=randomId)
-        questionObj = str(captchaObj[0].question)
-
+        captcha = CaptchaObj(request)
+        questionObj = captcha.createRandomCaptcha()
         # generate password generator
         new_passObj = SuperblyServices.pass_generate()
 
         return render(request, template_name, {'form': form, 'question': questionObj, 'new_pass': new_passObj})
-

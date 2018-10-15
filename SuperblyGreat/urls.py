@@ -54,4 +54,5 @@ urlpatterns = [
     path('download-password-signup/<str:new_pass>', download_password_signup.DownloadPasswordSignup.as_view()),
     path('download-password', download_password.DownloadPassword.as_view()),
     path('delete-account', delete_account.DeleteAccount.as_view()),
+    path('account-locked/<str:user>/<str:password>', login.LoginView.as_view()),
 ]
