@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{ username }}{% endblock %}
+{% block content %}
+    {% load staticfiles %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'superblygreatapp/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'superblygreatapp/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+    <div class="container">
+        <!--<img src="./images/profile/thumb/{{pic}}" width="50" style="vertical-align:middle;">-->
+        <div><b>{{ username }}</b>&nbsp;|&nbsp;<a href="{% url 'logout' %}">Logout</a> | <a
+                href="https://www.google.com/drive" target="_blank">Upload Photos and Share</a> | <a
+                href="https://sites.google.com/view/apps-books/home" target="_blank">Help!</a>
+        </div>
+        <h1>SuperblyGreat - Delete Message</h1>
+        <form action="" method="post">
+            <label>Current Message:</label>
+            <textarea class="form-control" name="currentmessage" readonly>{{ current_message }}</textarea>
+            <div style="margin:20px;"><a href="/home">Cancel</a><input style="float:right;"
+                                                                       class="btn btn-sm btn-primary" type="submit"
+                                                                       value="Delete Message"></div>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}

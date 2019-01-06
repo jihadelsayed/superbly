@@ -2,6 +2,7 @@
 {% block title %}{{ username }}{% endblock %}
 {% block content %}
 {% load staticfiles %}
+{% load convert %}
 <!-- Reload page automatically-->
 <script>
 
@@ -232,7 +233,7 @@
         <ul class="list-group">
           {% for key, value in messagefrom.items %}
           <li id="messageslist" class="list-group-item list-group-item-success">
-            <a href="#messageslist">{{ value }}</a></label> | <input type="checkbox" name="{{ key }}" value="{{ messageCount }}">
+            <a href="#messageslist">{{ value }}</a></label> | <input type="checkbox" name="{{ key }}" value="{{ messageCount }}"> | <a href="/delete-sender-message/{{ value|convert_slashes }}" >Delete Message</a>
                             </li>
           {% endfor %}
         </ul>
@@ -252,7 +253,7 @@
         <ul class="list-group">
           {% for sndr in senderFriend %}
           <li class="list-group-item list-group-item-info">
-            <a id="mymessagesrow" href="#gotomymessages">{{ sndr }}</a>
+            <a id="mymessagesrow" href="#gotomymessages">{{ sndr }} | <a href="/delete-message/{{ sndr|convert_slashes }}" >Delete Message</a></a>
           </li>
           {% endfor %}
         </ul>
@@ -277,7 +278,7 @@
       <ul class="list-group">
         {% for row in savedmessagefrom %}
         <li class="list-group-item list-group-item-info">
-          <a id="savedmessages" href="#gotosavedmessages">{{ row }}</a>
+          <a id="savedmessages" href="#gotosavedmessages">{{ row }} | <a href="/delete-saved-message/{{ row|convert_slashes }}" >Delete Message</a></a>
         </li>
         {% endfor %}
       </ul>

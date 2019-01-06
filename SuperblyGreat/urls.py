@@ -33,7 +33,10 @@ from messaging.views import save_messages
 from menu.views import change_pass
 from menu.views import download_password
 from menu.views import delete_account
-
+#from messaging.views import edit_message
+from messaging.views import delete_message
+from messaging.views import delete_saved_message
+from messaging.views import delete_sender_message
 
 import os.path
 
@@ -55,4 +58,8 @@ urlpatterns = [
     path('download-password', download_password.DownloadPassword.as_view()),
     path('delete-account', delete_account.DeleteAccount.as_view()),
     path('account-locked/<str:user>/<str:password>', login.LoginView.as_view()),
+    #path('edit-message/<str:user_message>', edit_message.EditMessage.as_view()),
+    path('delete-message/<str:user_message>', delete_message.DeleteMessage.as_view()),
+    path('delete-saved-message/<str:user_message>', delete_saved_message.DeleteSavedMessage.as_view()),
+    path('delete-sender-message/<str:user_message>', delete_sender_message.DeleteSenderMessage.as_view()),
 ]
