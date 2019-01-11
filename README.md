@@ -6,6 +6,8 @@
 ## Superbly Great Private Messaging System (Core)
 Website: [Superbly Great](https://www.superblygreat.com "Superbly Great")
 
+Note: Not all features reflected on the live website. Source code here on Github is much feature rich and updated.
+
 Other Website: [Superbly Great Info](http://www.superblygreat.info "Superbly Great Info") Information on how you can benefit from this.
 
 This is a private messaging Django app that gives users the ability to chat with
