@@ -19,6 +19,7 @@ Other special use cases:
 - Technical support chat system. For businesses that communicates directly at customers.
 - Your own messaging website. You can just upload this to your server or free hosting site and have your own FB.
 - As developers, you can extend and add features like photo sharing, video sharing, and more!
+- This is also ideal for kids for they don't need to get an email address and they don't have to put in their names, home addresses, or phone numbers.
 
 You can signup by just adding a username and password, entering the captcha answer
 and you can chat away for free. Using ONLY, a username and a password.
