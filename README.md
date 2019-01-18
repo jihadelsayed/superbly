@@ -3,7 +3,7 @@
 [logo]: https://i.imgur.com/UvmBiv1.png "Superbly Great"
 
 # superbly
-## Superbly Great Private Messaging System (Core)
+## Superbly Great Private Messaging System
 Website: [Superbly Great](https://www.superblygreat.com "Superbly Great")
 
 Note: Not all features reflected on the live website. Source code here on Github is much feature rich and updated.
