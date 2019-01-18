@@ -10,10 +10,16 @@ class DeleteAccount(View):
     @staticmethod
     def purge_all(request):
         # Delete user logged in User model, Friends, Messages, Saved Messages
-        userObj = Profile.objects.filter(username=request.session['username'])
+        userObjAcc = Account.objects.filter(username=request.session['username'])
         #print(request.session['username'])
-        user = Profile.objects.filter(id=userObj[0].id)
-        user.delete()
+        user_accnt = Account.objects.filter(id=userObjAcc[0].id)
+        user_accnt.delete()
+
+        # Delete user logged in User model, Friends, Messages, Saved Messages
+        userObjPro = Profile.objects.filter(username=request.session['username'])
+        #print(request.session['username'])
+        user_profile = Profile.objects.filter(id=userObjPro[0].id)
+        user_profile.delete()
 
         # delete all friend id in Friends model
         friendObj = Friends.objects.filter(friend_id=request.session['username'])
