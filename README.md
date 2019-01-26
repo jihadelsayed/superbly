@@ -63,6 +63,8 @@ You will see the Superbly Great logo, signup and login.
 
 Well Done!
 
+Important Note: If you are going to use superbly for production, please refer to this Django link: [Django Deployment Checklist](https://docs.djangoproject.com/en/2.1/howto/deployment/checklist "Django Deployment Checklist") 
+
 An Open Letter
 
 You know nowadays there is no more privacy. Big companies knows everything about you, but you don't
