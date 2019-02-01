@@ -67,9 +67,9 @@ Important Note: If you are going to use superbly for production, please refer to
 
 An Open Letter
 
-You know nowadays there is no more privacy. Big companies knows everything about you, but you don't
-know anything about them. Can they be trusted? Maybe not since we read news that these employees goes
-out-of-bounds and use your data for nefarious purposes and stalking women on-line and it's scary.
+You know nowadays there is no more privacy. Big companies know everything about you, but you don't
+know anything about them. Can they be trusted? Maybe not since we read the news that these employees 
+go out-of-bounds and use your data for nefarious purposes and stalking women online and it's scary.
 We cannot control social media from those powers beyond ourselves, that is why we need and our duty
 to stand up against intrusions into our lives and protect our freedom. We need to build a social
 network based on the foundation of these freedoms, promote privacy and enjoy our lives connecting
